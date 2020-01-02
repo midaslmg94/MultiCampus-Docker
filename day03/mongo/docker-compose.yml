@@ -1,0 +1,46 @@
+version: "3"
+services:
+    mongo1:
+        image: "mongo" # mongo라는 이미지가 있어야한다. docker images로 확인
+        ports:
+            - "16010:27017"
+        volumes: 
+            - $HOME/mongoRepl/mongo1:/data/db   # : 앞에 있는것 호스트OS가 가지고 있는 주소, : 뒤에 있는게 컨테이너에서의주소 data/db로 옮겨놓겠다.
+        networks:
+            - mongo-networks
+        command: mongod --replSet myapp 
+
+    mongo2:
+        image: "mongo"
+        ports:
+            - "26010:27017"
+        volumes: 
+            - $HOME/mongoRepl/mongo2:/data/db 
+        networks:
+            - mongo-networks
+        command: mongod --replSet myapp
+        depends_on: # mongo1이 동작된 다음에 2번이 동작하도록 하는 옵션
+            - mongo1
+    
+    mongo3:
+        image: "mongo" 
+        ports:
+            - "36010:27017"
+        volumes: 
+            - $HOME/mongoRepl/mongo3:/data/db 
+        networks:
+            - mongo-networks
+        command: mongod --replSet myapp
+        depends_on: # mongo2가 동작된 다음에 3번이 동작하도록 하는 옵션
+            - mongo2
+    
+    mongodbsetup: # Replica setting 을 ㅜ이함
+        image: "mongodb_settings"
+        depends_on: 
+            - mongo3
+        networks: 
+            - mongo-networks
+
+networks:
+    mongo-networks: # docker network create 와 같은 의미
+        driver: bridge
