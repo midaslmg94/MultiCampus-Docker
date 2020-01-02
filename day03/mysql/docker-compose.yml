@@ -1,0 +1,11 @@
+version: "3"
+services: 
+    my_sql:
+        image: "test_mysql"
+        ports:
+            - "13306:3306"
+        volumes:
+            - $HOME/mysqlRepl/mysql1:/data/db
+        networks: 
+            - mysql-networks
+        command: mysqld --replSet myapp
