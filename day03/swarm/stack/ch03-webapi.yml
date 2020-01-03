@@ -1,0 +1,26 @@
+version: "3"
+services:
+    nginx:
+        image: gihyodocker/nginx-proxy            
+        deploy:
+            replicas: 3 # 하나의 컨테이너에 서비스가 3개 복제된다는 의미. 
+            placement: 
+                constraints: [node.role!=manager] # 현재 manager 1개, worker가 3개 이므로 worker에만 설치 해야한다
+        environment:
+            SERVICE_PORTS: 80 # 서비스 포트를 추가
+            BACKEND_HOST: echo_api:8080 # 변수로 사용되는 값이므로 고정값이 아니다. echo가 가지고 있는 것 중 api를 의미함
+        depends_on:
+            - api
+        networks:
+            - ch03
+    api:
+        image: registry:5000/example/echo:latest
+        deploy:
+            replicas: 3
+            placement:  
+                constraints: [node.role!=manager] # manager에는 설치하지 말라는 제약조건 
+        networks:
+            - ch03
+networks:
+    ch03:
+        external: true   # 외부에서도 접속 가능

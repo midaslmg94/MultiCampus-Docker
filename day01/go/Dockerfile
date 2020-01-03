@@ -1,4 +1,6 @@
-FROM gihyodocker/basetest:latest
+FROM golang:1.10
 
-RUN cat /tmp/version
-RUN cat /tmp/version
+RUN mkdir /echo
+COPY main.go /echo
+
+CMD ["go", "run", "/echo/main.go"]
