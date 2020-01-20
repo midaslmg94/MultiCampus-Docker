@@ -14,7 +14,7 @@
 
   - 이민기 : Exercise 2
 
-    ![Exercise 2](images/Exercise 2.png)
+    <img src="images/Exercise 2.png" alt="Exercise 1" style="zoom:150%;" />
 
     ------
 
@@ -22,7 +22,7 @@
 
   - 박상우 : Exercise 3
 
-    ![Exercise 3](images/Exercise 3.png)
+    !<img src="images/Exercise 3.png" alt="Exercise 3" style="zoom:150%;" />
 
     ------
 
@@ -30,7 +30,7 @@
 
   - 이대희 : Exercise 4
 
-    ![Exercise 4](images/Exercise 4.png)
+    <img src="images/Exercise 4.png" alt="Exercise 4" style="zoom:150%;" />
 
     ------
 
@@ -38,4 +38,4 @@
 
   - 이종화 : Exercise 6
 
-    ![Exercise 6](images/Exercise 6.png)
+    <img src="images/Exercise 6.png" alt="Exercise 6" style="zoom:150%;" />
